@@ -1,0 +1,7 @@
+﻿  ConsoleApplication1.cpp
+C:\Users\timofey.latypov\Documents\Magic\SD_2\С++\ASCI_art\ConsoleApplication1\ConsoleApplication1.cpp(39,13): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\timofey.latypov\Documents\Magic\SD_2\С++\ASCI_art\ConsoleApplication1\ConsoleApplication1.cpp(43,21): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\timofey.latypov\Documents\Magic\SD_2\С++\ASCI_art\ConsoleApplication1\ConsoleApplication1.cpp(44,27): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  ConsoleApplication1.vcxproj -> C:\Users\timofey.latypov\Documents\Magic\SD_2\С++\ASCI_art\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
