@@ -45,3 +45,17 @@ class FlightService:
                     row[2]
                 ))
             return flights
+        
+    def get_by_id(self,flight_id:int):
+        """Получить рейс по идентификатору"""
+        return
+    
+    def update_flight(self, flight:Flight):
+        """Изменить существующий рейс. 
+            Если рейса не существует, ничего не делать."""
+        return
+    
+    def delete_flight(self,flight_id:int):
+        """Удалить существующий рейс.
+            Если рейса не существует, ничего не делать."""
+        return
