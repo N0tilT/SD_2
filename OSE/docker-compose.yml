@@ -40,7 +40,7 @@ services:
       POSTGRES_PASSWORD: "123Secret_a"
       PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
-      - plants-data:/var/lib/postgresql/data
+      - flight-data:/var/lib/postgresql/data
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres -d flightsdb" ]
       interval: 10s
@@ -77,7 +77,6 @@ services:
           memory: 1G
     networks:
       - postgres
-
 
 volumes:
   flight-data:
