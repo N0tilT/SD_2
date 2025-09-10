@@ -1,7 +1,14 @@
 from service import FlightService
 from flight import Flight
 
-service = FlightService("flights.db")
+db_config={
+    'host':'postgres',
+    'database':'flightsdb',
+    'user':'postgres',
+    'password':'123Secret_a',
+    'port':5432
+}
+service = FlightService(**db_config)
 
 print("ADD 3")
 print(service.create_flight(Flight(0,111,"111")))

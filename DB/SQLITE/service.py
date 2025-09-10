@@ -1,22 +1,37 @@
 import sqlite3
 from flight import Flight
 
+import psycopg2
+from psycopg2 import sql
+
 class FlightService:
-    def __init__(self,db_name: str = ""):
-        self.db_name = db_name
+    def __init__(self,
+                 database: str = "", 
+                 host: str="", 
+                 user:str = "", 
+                 password:str = "",
+                 port:str=""):
+        self.connection_parameters = {
+            'host':host,
+            'database':database,
+            'user':user,
+            'password':password,
+            'port':port
+        }
         self.init_db()
 
     def get_connection(self):
-        return sqlite3.connect(self.db_name)
+        return psycopg2.connect(**self.connection_parameters)
     
     def init_db(self):
         """Иницилизация таблиц"""
         with self.get_connection() as conn:
-            conn.execute('''
+            cursor = conn.cursor()
+            cursor.execute('''
                 CREATE TABLE IF NOT EXISTS flights(
-                         id INTEGER PRIMARY KEY AUTOINCREMENT,
-                         plane TEXT NOT NULL,
-                         price REAL NOT NULL
+                         id SERIAL PRIMARY KEY,
+                         plane VARCHAR(100) NOT NULL,
+                         price DECIMAL(10,2) NOT NULL
                          )
                 ''')
             conn.commit()
@@ -28,7 +43,7 @@ class FlightService:
             cursor.execute('''
                 INSERT INTO flights
                          (plane,price)
-                         VALUES (?,?)
+                         VALUES (%s,%s)
                 ''',(flight.plane,flight.price))
             conn.commit()
             return cursor.rowcount > 0
@@ -36,7 +51,7 @@ class FlightService:
     def get_all(self):
         with self.get_connection() as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM flights")
+            cursor.execute("SELECT * FROM flights ORDER BY id")
             rows = cursor.fetchall()
 
             flights = []
@@ -52,7 +67,7 @@ class FlightService:
         """Получить рейс по идентификатору"""
         with self.get_connection() as conn:
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM flights WHERE id = ?",(flight_id,))
+            cursor.execute("SELECT * FROM flights WHERE id = %s",(flight_id,))
             row = cursor.fetchone()
 
             if row:
@@ -70,8 +85,8 @@ class FlightService:
             cursor = conn.cursor()
             cursor.execute('''
                 UPDATE flights
-                SET price = ?, plane = ?
-                WHERE id = ?
+                SET price = %s, plane = %s
+                WHERE id = %s
                 ''',(flight.price, flight.plane, flight.id))
             conn.commit()
             return cursor.rowcount > 0
@@ -82,7 +97,7 @@ class FlightService:
         with self.get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute('''
-                DELETE FROM flights WHERE id = ?
+                DELETE FROM flights WHERE id = %s
                 ''',(flight_id,))
             conn.commit()
             return cursor.rowcount > 0
