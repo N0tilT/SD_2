@@ -4,8 +4,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 
 API_BASE_URL = "flightservice:8080"
-BOT_TOKEN = "7006443285:AAEIks3qPrr_VTz8SFOiOR6ilKjF9QcSDl8"
-
+BOT_TOKEN = ""
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
