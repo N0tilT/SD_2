@@ -12,7 +12,7 @@ class TestFlightAPI:
             "price":1000
         }]
         #Act
-        response_post = requests.post("localhost:8080/flights",data=data_in)
-        response_get = requests.get("localhost:8080/flights")
+        response_post = requests.post("http://localhost:8080/flights",data=data_in)
+        response_get = requests.get("http://localhost:8080/flights")
         #Assert
         assert data_expect==response_get.json()
