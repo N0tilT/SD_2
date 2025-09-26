@@ -9,7 +9,7 @@ from flight import Flight
 ## DB config
 db_config= DatabaseConfig(
     'flightsdb',
-    'postgres',
+    '192.168.133.20',
     'postgres',
     '123Secret_a',
     5432
